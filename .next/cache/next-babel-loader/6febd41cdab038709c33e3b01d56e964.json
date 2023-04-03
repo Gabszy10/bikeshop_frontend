@@ -1,0 +1,1 @@
+{"ast":null,"code":"import axios from \"axios\";\nlet host = process.env.API_URL;\nexport const fetchOrder = order_name => {\n  return axios.get(`${host}/api/user/order/name/${order_name}`).then(res => {\n    return res.data;\n  }).catch(err => err.response.data);\n};","map":null,"metadata":{},"sourceType":"module"}

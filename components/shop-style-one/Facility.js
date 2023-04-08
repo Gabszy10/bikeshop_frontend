@@ -11,7 +11,7 @@ class Facility extends Component {
                                 <div className="icon">
                                     <i className="fas fa-plane"></i>
                                 </div>
-                                <h3>Same Day Delivery</h3>
+                                <h3>Fast Shipping</h3>
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@ class Facility extends Component {
                                 <div className="icon">
                                     <i className="fas fa-headset"></i>
                                 </div>
-                                <h3>24/7 online support</h3>
+                                <h3>Online support</h3>
                             </div>
                         </div>
                     </div>

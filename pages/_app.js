@@ -45,7 +45,7 @@ export default withRedux(initStore)(
           <MessengerCustomerChat
             pageId="127061742122440"
             appId="592986798075465"
-            htmlRef="www.facebook.com/i-Wheels.shop"
+            htmlRef="www.facebook.com/flowerninja.shop"
           />
           ,
         </React.Fragment>

@@ -1849,15 +1849,18 @@ Main Banner Area CSS
 }
 
 .main-banner.item-bg1 {
-  background-image: url(https://scontent.fmnl6-1.fna.fbcdn.net/v/t1.0-9/151321352_235049847990295_3910521018925012382_n.png?_nc_cat=107&ccb=3&_nc_sid=e3f864&_nc_eui2=AeF54T7KyLWniaMXQoXgU6Pi-9aXCY6yUsP71pcJjrJSwyXUEtGSC6Yf2MrFUy7IRHMMpcqzLiYrIwqhOfUGzAXv&_nc_ohc=gXeDR_hsYgAAX8ybcNZ&_nc_ht=scontent.fmnl6-1.fna&oh=429ede72ed6f595804619db24335063f&oe=60558FFE);
+  background-image: url(https://sfbike.org/wp-content/uploads/2015/04/Bike-to-Shop-Day-banner.jpg);
+  background-size: contain;
 }
 
+
 .main-banner.item-bg2 {
-  background-image: url(https://scontent.fmnl6-1.fna.fbcdn.net/v/t1.0-9/138592179_214154903413123_7804730527023839165_o.jpg?_nc_cat=101&ccb=3&_nc_sid=e3f864&_nc_eui2=AeHT3ihVVMMZiQZ24gf_TtWfyylNF0MKphDLKU0XQwqmENEcV5efCY4wo0Dhqv0SBhJp89AS6_YSdQuawpMzNcEx&_nc_ohc=BtTmxBelNo8AX-q8C_h&_nc_ht=scontent.fmnl6-1.fna&oh=6d162edd92a30944a025792ce1c3676f&oe=60554158);
+  background-image: url(https://scontent.fmnl3-1.fna.fbcdn.net/v/t1.6435-9/128684902_105301751437427_8716717574340522355_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=e3f864&_nc_ohc=OV4h1PhxhmEAX_O10GC&_nc_ht=scontent.fmnl3-1.fna&oh=00_AfAZrZWUuZlTQKnUZe_s7i370Sj2wXHs-kMiQXsb6ArLjw&oe=64587C11);
+  background-size: cover;
 }
 
 .main-banner.item-bg3 {
-  background-image: url(https://scontent.fmnl6-1.fna.fbcdn.net/v/t1.0-9/138592179_214154903413123_7804730527023839165_o.jpg?_nc_cat=101&ccb=3&_nc_sid=e3f864&_nc_eui2=AeHT3ihVVMMZiQZ24gf_TtWfyylNF0MKphDLKU0XQwqmENEcV5efCY4wo0Dhqv0SBhJp89AS6_YSdQuawpMzNcEx&_nc_ohc=BtTmxBelNo8AX-q8C_h&_nc_ht=scontent.fmnl6-1.fna&oh=6d162edd92a30944a025792ce1c3676f&oe=60554158);
+  background-image: url(https://storage.googleapis.com/macrovector-acl-eu/previews/47851/preview_47851.jpg);
 }
 
 .main-banner.item-bg4 {

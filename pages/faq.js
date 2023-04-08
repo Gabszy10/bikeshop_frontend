@@ -73,23 +73,6 @@ class Index extends Component {
                       <AccordionItem>
                         <AccordionItemHeading>
                           <AccordionItemButton>
-                            DO YOU DELIVER SAME DAY?
-                          </AccordionItemButton>
-                        </AccordionItemHeading>
-                        <AccordionItemPanel>
-                          <ul>
-                            <li>
-                              We offer Free Same Day Delivery as long as you
-                              place your order on or before 6pm on weekdays and
-                              on or before 4pm on weekends.
-                            </li>
-                          </ul>
-                        </AccordionItemPanel>
-                      </AccordionItem>
-
-                      <AccordionItem>
-                        <AccordionItemHeading>
-                          <AccordionItemButton>
                             DO YOU ACCEPT FUTURE ORDER?
                           </AccordionItemButton>
                         </AccordionItemHeading>

@@ -104,39 +104,41 @@ function CartContent(props) {
   }
 
   const isValid = () => {
-    if (!state.delivery_date) {
-      toast.error("Please select delivery date.", {
-        position: "bottom-left",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      return false;
-    } else if (!state.delivery_time) {
-      toast.error("Please select delivery time.", {
-        position: "bottom-left",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      return false;
-    } else if (isDateBeforeToday(state.delivery_date)) {
-      toast.error("Please select present date.", {
-        position: "bottom-left",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-      return false;
-    } else {
-      return true;
-    }
+    // if (!state.delivery_date) {
+    //   toast.error("Please select delivery date.", {
+    //     position: "bottom-left",
+    //     autoClose: 2000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //   });
+    //   return false;
+    // } else if (!state.delivery_time) {
+    //   toast.error("Please select delivery time.", {
+    //     position: "bottom-left",
+    //     autoClose: 2000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //   });
+    //   return false;
+    // } else if (isDateBeforeToday(state.delivery_date)) {
+    //   toast.error("Please select present date.", {
+    //     position: "bottom-left",
+    //     autoClose: 2000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //   });
+    //   return false;
+    // } else {
+    //   return true;
+    // }
+
+    return true;
   };
 
   const proceedToCheckout = () => {
@@ -181,6 +183,28 @@ function CartContent(props) {
     }
   };
 
+  const getDate = (num) => {
+    let date = new Date();
+    date.setDate(date.getDate() + num);
+
+    return date;
+  };
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   return (
     <section className="cart-area ptb-60">
       <ToastContainer transition={Slide} />
@@ -194,75 +218,33 @@ function CartContent(props) {
 
               <br />
 
-              <div className="row">
-                <div className="col-lg-6 col-md-6">
-                  <div className="form-group">
-                    <label>Delivery Time</label>
-                    <div class="form-group">
-                      <select
-                        class="form-control"
-                        id="exampleFormControlSelect1"
-                        name="delivery_time"
-                        onChange={handleOnChange}
-                      >
-                        <option value="">Select time</option>
-                        <option
-                          value="9am - 2pm"
-                          selected={
-                            state.delivery_time == "9am - 2pm" ? true : false
-                          }
-                        >
-                          9am - 2pm
-                        </option>
-                        <option
-                          value="2pm - 5pm"
-                          selected={
-                            state.delivery_time == "2pm - 5pm" ? true : false
-                          }
-                        >
-                          2pm - 6pm
-                        </option>
-                        <option
-                          value="6pm - 9pm"
-                          selected={
-                            state.delivery_time == "6pm - 9pm" ? true : false
-                          }
-                        >
-                          6pm - 9pm
-                        </option>
-                        <option
-                          value="Anytime"
-                          selected={
-                            state.delivery_time == "Anytime" ? true : false
-                          }
-                        >
-                          Anytime
-                        </option>
-                      </select>
+              <div className="container text-center">
+                <div className="row">
+                  <div className="col-lg-6 col-md-6">
+                    <div>
+                      <h4>Provinces</h4>
+                      <h5>(5 - 14 Days)</h5>
+                      <h5>
+                        Get By: {months[getDate(0).getMonth()]}{" "}
+                        {getDate(5).getDate()} - {getDate(14).getDate()}{" "}
+                      </h5>
                     </div>
-                    {/* {state.billing_phone.error && (
-                    <p style={errorStyle}>{state.billing_phone.error}</p>
-                  )} */}
                   </div>
-                </div>
-                <div className="col-lg-6 col-md-6">
-                  <label>Delivery Date</label>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={state.delivery_date}
-                      readOnly
-                    />
+
+                  <div className="col-lg-6 col-md-6">
+                    <div>
+                      <h4>Metro Manila</h4>
+                      <h5>(1 - 7 Days)</h5>
+                      <h5>
+                        Get By: {months[getDate(0).getMonth()]}{" "}
+                        {getDate(1).getDate()} - {getDate(7).getDate()}{" "}
+                      </h5>
+                    </div>
                   </div>
-                  <Calendar
-                    handleStateChange={handleCalendarChange}
-                    date={
-                      state.delivery_date != "" ? state.delivery_date : null
-                    }
-                  />
                 </div>
               </div>
+
+              <br />
 
               <div className="col-lg-12 col-md-12">
                 <div className="form-group">

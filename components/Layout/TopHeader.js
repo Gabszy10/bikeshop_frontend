@@ -39,6 +39,13 @@ function TopHeader(props) {
           <div className="row align-items-center">
             <div className="col-lg-7 col-md-6">
               <ul className="top-header-nav">
+                {!user ? (
+                  <li>
+                    <Link href="/login">
+                      <a>Login</a>
+                    </Link>
+                  </li>
+                ) : null}
                 <li>
                   <Link href="/about">
                     <a>About</a>

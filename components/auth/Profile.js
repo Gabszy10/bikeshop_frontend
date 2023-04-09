@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import cookie from "js-cookie";
 import axios from "axios";
 import { formatNumber } from "../../helpers/function";
+import {
+  decryptInfoData,
+  encryptInfoData,
+} from "../../store/actions/infoActions";
 
 let host = process.env.API_URL;
 
 function Profile() {
   const [history, sethistory] = useState([]);
+  const [user, setUser] = useState(null);
   const [orderDetails, setorderDetails] = useState(null);
 
   useEffect(() => {
@@ -15,8 +20,60 @@ function Profile() {
       // window.location.href = "/";
     } else {
       fetchOrders(token);
+      fetchUserInfo(token);
     }
   }, []);
+
+  const fetchUserInfo = async (token) => {
+    try {
+      let res = await axios.get(`${host}/api/user/user/details`, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+
+      if (res) {
+        setUser(res.data.userDetails);
+        let decryptedData = decryptInfoData();
+        console.log(decryptedData);
+        let newData = {
+          ...decryptedData,
+          shipping_firstName: { value: "", error: "" },
+          shipping_lastName: { value: "", error: "" },
+          shipping_address: { value: "", error: "" },
+          shipping_city: { value: "", error: "" },
+          shipping_zip: { value: "", error: "" },
+          billing_email: {
+            value: res.data.userDetails.email || "",
+            error: "",
+          },
+          shipping_phone: { value: "", error: "" },
+          billing_firstName: {
+            value: res.data.userDetails.first_name || "",
+            error: "",
+          },
+          billing_lastName: {
+            value: res.data.userDetails.last_name || "",
+            error: "",
+          },
+          billing_phone: { value: "", error: "" },
+          note: { value: "", error: "" },
+          message: { value: "", error: "" },
+          delivery_date: { value: "", error: "" },
+          delivery_time: { value: "", error: "" },
+        };
+
+        console.log(newData);
+        encryptInfoData(newData);
+      }
+      console.log(res);
+    } catch (error) {
+      if (error.response.status == 401) {
+        cookie.remove("_wus_BJK");
+        window.location.href = "/";
+      }
+    }
+  };
 
   const fetchOrders = async (token) => {
     try {
@@ -50,14 +107,16 @@ function Profile() {
         <div className="card" style={{ marginLeft: "1.7rem" }}>
           <div className="card-body m-auto text-center">
             <img
-              src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+              src="https://t3.ftcdn.net/jpg/03/39/45/96/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg"
               alt=""
               height="100"
               style={{ borderRadius: "50%", marginBottom: "1rem" }}
             />
-            <h5 className="card-title">I-Wheels</h5>
-            <button className="btn btn-link">Order History</button>
-            <button className="btn btn-link">Update Profile</button>
+            <h5 className="card-title">
+              {user ? user.first_name : "N/A"} {user ? user.last_name : "N/A"}
+            </h5>
+            {/* <button className="btn btn-link">Order History</button> */}
+            {/* <button className="btn btn-link">Update Profile</button> */}
           </div>
         </div>
       </div>
@@ -74,26 +133,29 @@ function Profile() {
                   <div className="card-body">
                     <div className="row">
                       <div className="col-md-4">
-                        <p className="card-text">
-                          Delivery Date: {order.delivery_date}
-                        </p>
-                        <p className="card-text">
-                          Delivery Time: {order.delivery_time}
-                        </p>
+                        <p className="card-text">Items:</p>
+                        {order.order_items.map((item) => (
+                          <p key={item.product_id} className="card-text">
+                            {item.product.name} - {item.quantity}x
+                          </p>
+                        ))}
                       </div>
                       <div className="col-md-4">
                         <p className="card-text">
                           Mode Of Payment: {order.payment_method}
                         </p>
                         <p className="card-text">
-                          Status: {order.order_status_id}
+                          Payment Status: {order.payment_status.name}
                         </p>
                       </div>
                       <div className="col-md-4">
                         <p className="card-text">
+                          Order Status: {order.order_status.name}
+                        </p>
+                        <p className="card-text">
                           Amount: P{formatNumber(order.total)}
                         </p>
-                        <button
+                        {/* <button
                           onClick={handleDetails}
                           data-toggle="modal"
                           data-target="#exampleModal"
@@ -105,7 +167,7 @@ function Profile() {
                           }}
                         >
                           View Details
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>

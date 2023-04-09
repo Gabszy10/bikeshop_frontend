@@ -10,13 +10,14 @@ function ShippingSummary(props) {
   useEffect(() => {
     let decryptedData = decryptInfoData();
     if (decryptedData) {
-      if (
-        !decryptedData.delivery_date.value ||
-        !decryptedData.delivery_time.value
-      ) {
-        alert("Please input delivery date and time");
-        return (window.location.href = "/cart");
-      }
+      // if (
+      //   !decryptedData.delivery_date.value ||
+      //   !decryptedData.delivery_time.value
+      // ) {
+      //   alert("Please input delivery date and time");
+      //   return (window.location.href = "/cart");
+      // }
+      
       setuserInfo(decryptedData);
     } else {
       window.location.href = "/checkout";
@@ -98,7 +99,7 @@ function ShippingSummary(props) {
             </thead>
 
             <tbody>
-              <tr>
+              {/* <tr>
                 <td className="total-price">
                   <span>Delivery Date</span>
                 </td>
@@ -120,7 +121,7 @@ function ShippingSummary(props) {
                     {userInfo.delivery_time.value}
                   </span>
                 </td>
-              </tr>
+              </tr> */}
 
               <tr>
                 <td className="total-price">

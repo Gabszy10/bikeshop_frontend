@@ -41,14 +41,14 @@ function Thankyou(props) {
                   <p>Order Name:</p>
                   <p className="ml-auto">{order["order_name"]}</p>
                 </div>
-                <div className="d-flex">
+                {/* <div className="d-flex">
                   <p>Delivery Date:</p>
                   <p className="ml-auto">{order["delivery_date"]}</p>
                 </div>
                 <div className="d-flex">
                   <p>Delivery Time:</p>
                   <p className="ml-auto">{order["delivery_time"]}</p>
-                </div>
+                </div> */}
                 <div className="d-flex">
                   <p>Contact Email:</p>
                   <p className="ml-auto">

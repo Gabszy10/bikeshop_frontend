@@ -18,15 +18,16 @@ function useForm(
   useEffect(() => {
     let decryptedData = decryptInfoData();
     if (decryptedData) {
-      if (
-        !decryptedData.delivery_date.value ||
-        !decryptedData.delivery_time.value
-      ) {
-        alert("Please input delivery date and time");
-        window.location.href = "/cart";
-      } else {
-        setState(decryptedData);
-      }
+      // if (
+      //   !decryptedData.delivery_date.value ||
+      //   !decryptedData.delivery_time.value
+      // ) {
+      //   alert("Please input delivery date and time");
+      //   window.location.href = "/cart";
+      // } else {
+      //   setState(decryptedData);
+      // }
+      setState(decryptedData);
     }
   }, []);
 

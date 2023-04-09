@@ -183,7 +183,7 @@ function CheckoutForm({ total, shipping }) {
     shipping_phone: {
       required: true,
       validator: {
-        regEx: /^0(9|4)\d{9}$/,
+        regEx: /^(09|\+639)\d{9}$/,
         error: "Invalid phone number format use like 09343243243.",
       },
     },
@@ -207,7 +207,7 @@ function CheckoutForm({ total, shipping }) {
     billing_phone: {
       required: true,
       validator: {
-        regEx: /^0(9|4)\d{9}$/,
+        regEx: /^(09|\+639)\d{9}$/,
         error: "Invalid phone number format use like 09343243243.",
       },
     },

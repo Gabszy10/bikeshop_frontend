@@ -99,10 +99,10 @@ function Login(props) {
                   >
                     Login
                   </button>
-
+{/* 
                   <Link href="#">
                     <a className="forgot-password">Lost your password?</a>
-                  </Link>
+                  </Link> */}
                 </form>
               </div>
             </div>

@@ -179,7 +179,52 @@ function MegaMenu(props) {
                     </>
                   ) : null} */}
 
-                  <li className="nav-item megamenu">
+                  {categories.length ? (
+                    <>
+                      {categories.map((category, i) => {
+                        if (category.status) {
+                          if (category.sub_categories.length) {
+                            return (
+                              <li key={i} className="nav-item p-relative">
+                                <Link key={i} href="#">
+                                  <a className="nav-link">
+                                    {category.name}{" "}
+                                    <i className="fas fa-chevron-down"></i>
+                                  </a>
+                                </Link>
+
+                                <ul className="dropdown-menu">
+                                  {category.sub_categories.map((subCat, i) => {
+                                    return (
+                                      <li key={i} className="nav-item">
+                                        <Link
+                                          href={`/subcategory/${subCat.slug}`}
+                                        >
+                                          <a className="nav-link">
+                                            {subCat.name}
+                                          </a>
+                                        </Link>
+                                      </li>
+                                    );
+                                  })}
+                                </ul>
+                              </li>
+                            );
+                          } else {
+                            return (
+                              <li key={i} className="nav-item megamenu">
+                                <Link href={`/category/${category.slug}`}>
+                                  <a className="nav-link">{category.name}</a>
+                                </Link>
+                              </li>
+                            );
+                          }
+                        }
+                      })}
+                    </>
+                  ) : null}
+
+                  {/* <li className="nav-item megamenu">
                     <Link href="#">
                       <a className="nav-link">Road bike</a>
                     </Link>
@@ -201,9 +246,9 @@ function MegaMenu(props) {
                     <Link href="#">
                       <a className="nav-link">E-bike</a>
                     </Link>
-                  </li>
+                  </li> */}
 
-                  <li className="nav-item p-relative">
+                  {/* <li className="nav-item p-relative">
                     <Link href="#">
                       <a className="nav-link">
                         Budget <i className="fas fa-chevron-down"></i>
@@ -235,7 +280,7 @@ function MegaMenu(props) {
                         </Link>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                 </ul>
 
                 <div className="others-option">

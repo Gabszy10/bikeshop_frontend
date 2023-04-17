@@ -43,7 +43,7 @@ export default withRedux(initStore)(
           </Provider>
           {/* <GoTop scrollStepInPx="50" delayInMs="10.50" /> */}
           <MessengerCustomerChat
-            pageId="127061742122440"
+            pageId="100091796176729"
             appId="592986798075465"
             htmlRef="www.facebook.com/flowerninja.shop"
           />

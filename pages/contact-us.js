@@ -31,8 +31,7 @@ class Index extends Component {
 
                       <ul className="contact-list">
                         <li>
-                          <i className="fas fa-map-marker-alt"></i> Location:
-                          Kalayaan Avenue, Pitogo, Makati City, Philippines
+                          <i className="fas fa-map-marker-alt"></i> Location: 41-31 Lilac St, Marikina, 1800 Metro Manila, Philippines
                         </li>
                         <li>
                           <i className="fas fa-phone"></i> Call Us:{" "}
@@ -55,12 +54,12 @@ class Index extends Component {
                       <h3>Follow Us:</h3>
                       <ul className="social">
                         <li>
-                          <a href="https://www.facebook.com/i-Wheels.shop">
+                          <a href="https://www.facebook.com/i-Wheels-104804961487106">
                             <i className="fab fa-facebook-f"></i>
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.instagram.com/i-Wheelsph/">
+                          <a href="https://www.instagram.com/iwheelsph/">
                             <i className="fab fa-instagram"></i>
                           </a>
                         </li>

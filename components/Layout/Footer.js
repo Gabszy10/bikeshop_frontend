@@ -92,8 +92,7 @@ class Footer extends Component {
                 <ul className="footer-contact-info">
                   <li>
                     <i className="fas fa-map-marker-alt"></i>
-                    Location (Manila Branch): Kalayaan Avenue, Pitogo, Makati
-                    City, Philippines
+                    Location (Manila Branch): 41-31 Lilac St, Marikina, 1800 Metro Manila, Philippines
                   </li>
                   <li>
                     <i className="fas fa-phone"></i>

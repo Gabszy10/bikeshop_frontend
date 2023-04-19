@@ -2534,6 +2534,7 @@ All Products Area CSS
 
 .single-product-box .product-image img {
   width: 100%;
+  height:230px !important;
 }
 
 .single-product-box .product-image img:nth-child(2) {

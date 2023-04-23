@@ -303,11 +303,11 @@ function CartContent(props) {
                   </li>
                 </ul>
 
-                {total < 800 && (
+                {total > 10000000 && (
                   <p style={{ color: "red" }}>
                     Minimum order is ₱800. If order is below ₱800, you will be
                     charge to get to the 800 limit.
-                  </p>
+                 </p>
                 )}
                 <div className="row">
                   <div className="col-md-6">

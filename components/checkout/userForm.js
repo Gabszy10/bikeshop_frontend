@@ -100,7 +100,7 @@ function useForm(
     }
   }
 
-  return { state, disable, handleOnChange, handleOnSubmit };
+  return { state, disable, handleOnChange, handleOnSubmit, setState };
 }
 
 export default useForm;

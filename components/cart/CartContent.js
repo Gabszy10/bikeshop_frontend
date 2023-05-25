@@ -12,6 +12,7 @@ import {
   encryptInfoData,
 } from "../../store/actions/infoActions";
 import ForceAddon from "../shop-style-one/ForceAddon";
+import Customization from "./Customization";
 
 function CartContent(props) {
   const [cart, setcart] = useState([]);
@@ -206,138 +207,142 @@ function CartContent(props) {
   ];
 
   return (
-    <section className="cart-area ptb-60">
-      <ToastContainer transition={Slide} />
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12 col-md-12">
-            <form>
-              <div className="cart-table table-responsive">
-                <CartProduct setcart={setcart} isCampaign={isCampaign} />
-              </div>
+    <>
+      <Customization cart={cart} />
 
-              <br />
+      <section className="cart-area ptb-60">
+        <ToastContainer transition={Slide} />
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12 col-md-12">
+              <form>
+                <div className="cart-table table-responsive">
+                  <CartProduct setcart={setcart} isCampaign={isCampaign} />
+                </div>
 
-              <div className="container text-center">
-                <div className="row">
-                  <div className="col-lg-6 col-md-6">
-                    <div>
-                      <h4>Provinces</h4>
-                      <h5>(5 - 14 Days)</h5>
-                      <h5>
-                        Get By: {months[getDate(0).getMonth()]}{" "}
-                        {getDate(5).getDate()} - {getDate(14).getDate()}{" "}
-                      </h5>
+                <br />
+
+                <div className="container text-center">
+                  <div className="row">
+                    <div className="col-lg-6 col-md-6">
+                      <div>
+                        <h4>Provinces</h4>
+                        <h5>(5 - 14 Days)</h5>
+                        <h5>
+                          Get By: {months[getDate(0).getMonth()]}{" "}
+                          {getDate(5).getDate()} - {getDate(14).getDate()}{" "}
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-6 col-md-6">
+                      <div>
+                        <h4>Metro Manila</h4>
+                        <h5>(1 - 7 Days)</h5>
+                        <h5>
+                          Get By: {months[getDate(0).getMonth()]}{" "}
+                          {getDate(1).getDate()} - {getDate(7).getDate()}{" "}
+                        </h5>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="col-lg-6 col-md-6">
-                    <div>
-                      <h4>Metro Manila</h4>
-                      <h5>(1 - 7 Days)</h5>
-                      <h5>
-                        Get By: {months[getDate(0).getMonth()]}{" "}
-                        {getDate(1).getDate()} - {getDate(7).getDate()}{" "}
-                      </h5>
-                    </div>
+                <br />
+
+                <div className="col-lg-12 col-md-12">
+                  <div className="form-group">
+                    <label>
+                      Delivery Instruction (Optional){" "}
+                      <span className="required">*</span>
+                    </label>
+                    <textarea
+                      name="note"
+                      id="notes"
+                      cols="30"
+                      rows="6"
+                      value={state.note}
+                      onChange={handleOnChange}
+                      placeholder="Instruction to delivery rider"
+                      className="form-control"
+                    />
                   </div>
                 </div>
-              </div>
 
-              <br />
-
-              <div className="col-lg-12 col-md-12">
-                <div className="form-group">
-                  <label>
-                    Delivery Instruction (Optional){" "}
-                    <span className="required">*</span>
-                  </label>
-                  <textarea
-                    name="note"
-                    id="notes"
-                    cols="30"
-                    rows="6"
-                    value={state.note}
-                    onChange={handleOnChange}
-                    placeholder="Instruction to delivery rider"
-                    className="form-control"
-                  />
+                <div className="col-lg-12 col-md-12">
+                  <div className="form-group">
+                    <label>
+                      Message (Optional) <span className="required">*</span>
+                    </label>
+                    <textarea
+                      name="message"
+                      id="messages"
+                      cols="30"
+                      rows="6"
+                      value={state.message}
+                      onChange={handleOnChange}
+                      placeholder="Your message to receiver"
+                      className="form-control"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="col-lg-12 col-md-12">
-                <div className="form-group">
-                  <label>
-                    Message (Optional) <span className="required">*</span>
-                  </label>
-                  <textarea
-                    name="message"
-                    id="messages"
-                    cols="30"
-                    rows="6"
-                    value={state.message}
-                    onChange={handleOnChange}
-                    placeholder="Your message to receiver"
-                    className="form-control"
-                  />
-                </div>
-              </div>
+                <ForceAddon setAddon={setAddon} />
 
-              <ForceAddon setAddon={setAddon} />
+                <div className="cart-totals">
+                  <h3>Cart Totals</h3>
 
-              <div className="cart-totals">
-                <h3>Cart Totals</h3>
-
-                <ul>
-                  <li>
-                    Subtotal <span>₱{formatNumber(total)}</span>
-                  </li>
-                  {/* <li>
+                  <ul>
+                    <li>
+                      Subtotal <span>₱{formatNumber(total)}</span>
+                    </li>
+                    {/* <li>
                     Shipping <span>₱150.00</span>
                   </li> */}
-                  <li>
-                    Total{" "}
-                    <span>
-                      <b>₱{formatNumber(total)}</b>
-                    </span>
-                  </li>
-                </ul>
+                    <li>
+                      Total{" "}
+                      <span>
+                        <b>₱{formatNumber(total)}</b>
+                      </span>
+                    </li>
+                  </ul>
 
-                {total > 10000000 && (
-                  <p style={{ color: "red" }}>
-                    Minimum order is ₱800. If order is below ₱800, you will be
-                    charge to get to the 800 limit.
-                 </p>
-                )}
-                <div className="row">
-                  <div className="col-md-6">
-                    <Link href="/">
-                      <a style={{ marginBottom: "0.5rem" }}>
-                        <i
-                          className="fas fa-angle-double-left"
-                          style={{ marginRight: "5px" }}
-                        ></i>
-                        Back to Shop
-                      </a>
-                    </Link>
-                  </div>
+                  {total < 100 && (
+                    <p style={{ color: "red" }}>
+                      Minimum order is 100. If order is below 100, you will be
+                      charge to get to the 100 limit.
+                    </p>
+                  )}
+                  <div className="row">
+                    <div className="col-md-6">
+                      <Link href="/">
+                        <a style={{ marginBottom: "0.5rem" }}>
+                          <i
+                            className="fas fa-angle-double-left"
+                            style={{ marginRight: "5px" }}
+                          ></i>
+                          Back to Shop
+                        </a>
+                      </Link>
+                    </div>
 
-                  <div className="col-md-6">
-                    <button
-                      type="button"
-                      onClick={proceedToCheckout}
-                      className="btn btn-light proceed-checkout"
-                    >
-                      CONTINUE
-                    </button>
+                    <div className="col-md-6">
+                      <button
+                        type="button"
+                        onClick={proceedToCheckout}
+                        className="btn btn-light proceed-checkout"
+                      >
+                        CONTINUE
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

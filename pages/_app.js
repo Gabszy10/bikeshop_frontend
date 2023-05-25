@@ -8,16 +8,15 @@ import "react-image-lightbox/style.css";
 import "../assets/styles/responsive.css";
 import "react-calendar/dist/Calendar.css";
 import "react-toastify/dist/ReactToastify.css";
+import "react-chatbot-kit/build/main.css";
 import "../assets/styles/style.css";
-
-import MessengerCustomerChat from "react-messenger-customer-chat";
-
 import { Provider } from "react-redux";
 import App from "next/app";
 import withRedux from "next-redux-wrapper";
 import { initStore } from "../store/reducers/cartReducer";
 import { DefaultSeo } from "next-seo";
-import GoTop from "../components/Shared/GoTop";
+
+import BotChat from "../components/chatbot";
 
 export default withRedux(initStore)(
   class MyApp extends App {
@@ -41,13 +40,8 @@ export default withRedux(initStore)(
           <Provider store={store}>
             <Component {...pageProps} />
           </Provider>
-          {/* <GoTop scrollStepInPx="50" delayInMs="10.50" /> */}
-          <MessengerCustomerChat
-            pageId="127061742122440"
-            appId="592986798075465"
-            htmlRef="www.facebook.com/flowerninja.shop"
-          />
-          ,
+          {/* <GoTop scrollStepInPx="50" delayInMs="10.50" /> */},
+          <BotChat />
         </React.Fragment>
       );
     }

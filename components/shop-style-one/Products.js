@@ -233,7 +233,19 @@ function Products(props) {
                                       <i className="fas fa-star"></i>
                                     </div>
 
-                                    <Link href={`/product/${data.slug}`}>
+                                    {data.stock > 0 ? (
+                                      <Link href={`/product/${data.slug}`}>
+                                        <a
+                                          className="btn btn-light"
+                                          onClick={(e) => {
+                                            // e.preventDefault();
+                                            // handleAddToCart(data);
+                                          }}
+                                        >
+                                          Add to Cart
+                                        </a>
+                                      </Link>
+                                    ) : (
                                       <a
                                         className="btn btn-light"
                                         onClick={(e) => {
@@ -241,9 +253,9 @@ function Products(props) {
                                           // handleAddToCart(data);
                                         }}
                                       >
-                                        Add to Cart
+                                        Out of Stock
                                       </a>
-                                    </Link>
+                                    )}
                                   </div>
                                 </div>
                               </div>

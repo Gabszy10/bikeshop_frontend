@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Router from "next/router";
 import { connect } from "react-redux";
 import OrderSummary from "./OrderSummary";
@@ -10,6 +10,7 @@ import { ToastContainer, toast, Zoom } from "react-toastify";
 import { encryptInfoData } from "../../store/actions/infoActions";
 import { isDateBeforeToday } from "../../helpers/function";
 import { clearData } from "../../store/actions/cartActions";
+import Cookies from "js-cookie";
 
 function CheckoutForm({ total, shipping }) {
   let host = process.env.API_URL;
@@ -175,7 +176,8 @@ function CheckoutForm({ total, shipping }) {
     billing_email: {
       required: true,
       validator: {
-        regEx: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        regEx:
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         error: "Invalid email format, use like example@gmail.com",
       },
     },
@@ -229,7 +231,7 @@ function CheckoutForm({ total, shipping }) {
     },
   };
 
-  const { state, handleOnChange, handleOnSubmit, disable } = useForm(
+  const { state, handleOnChange, handleOnSubmit, disable, setState } = useForm(
     stateSchema,
     validationStateSchema,
     handleSubmit,
@@ -250,6 +252,30 @@ function CheckoutForm({ total, shipping }) {
     }
   };
 
+  const handleCheckBox = (e) => {
+    if (e.target.checked) {
+      if (Cookies.get("user")) {
+        const userInfo = JSON.parse(Cookies.get("user"));
+        setState({
+          ...stateSchema,
+          shipping_firstName: { value: userInfo.first_name, error: "" },
+          shipping_lastName: { value: userInfo.last_name, error: "" },
+          shipping_address: { value: userInfo.address, error: "" },
+          shipping_city: { value: userInfo.city, error: "" },
+          shipping_zip: { value: userInfo.zip, error: "" },
+        });
+      }
+    } else {
+      setState({
+        ...stateSchema,
+        shipping_firstName: { value: "", error: "" },
+        shipping_lastName: { value: "", error: "" },
+        shipping_address: { value: "", error: "" },
+        shipping_city: { value: "", error: "" },
+        shipping_zip: { value: "", error: "" },
+      });
+    }
+  };
   return (
     <>
       <ToastContainer transition={Zoom} />
@@ -259,6 +285,18 @@ function CheckoutForm({ total, shipping }) {
             <div className="row">
               <div className="col-lg-6 col-md-12">
                 <div className="shipping-details">
+                  <div class="form-check float-right">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      onChange={handleCheckBox}
+                    />
+                    <label class="form-check-label" for="exampleCheck1">
+                      Same as my user address
+                    </label>
+                  </div>
+                  <br />
+                  <hr />
                   <h3 className="title">Send my orders to</h3>
 
                   <div className="row">

@@ -23,6 +23,7 @@ function CartProduct(props) {
 
     let myProd = decryptData(encryptedData);
     setcart(myProd);
+    props.setcart(myProd);
   }, [props.products]);
 
   const handleRemove = (id) => {

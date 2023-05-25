@@ -18,6 +18,7 @@ function Register(props) {
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
+    address: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -35,6 +36,7 @@ function Register(props) {
       !userData.password ||
       !userData.confirmPassword ||
       !userData.firstName ||
+      !userData.address ||
       !userData.lastName
     ) {
       toast.error("Please input all fields");
@@ -113,6 +115,42 @@ function Register(props) {
                   placeholder="Enter your name"
                   id="name"
                   name="email"
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Address</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter your address"
+                  id="address"
+                  name="address"
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Town / City</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter your town / city"
+                  id="city"
+                  name="city"
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Postcode / Zip</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter your zip code"
+                  id="zip"
+                  name="zip"
                   onChange={(e) => handleChange(e)}
                 />
               </div>

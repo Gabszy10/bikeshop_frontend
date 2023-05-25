@@ -5,30 +5,30 @@ var CryptoJS = require("crypto-js");
 
 let host = process.env.API_URL;
 
-export const userRegister = (userData, setIsLoading, cb) => async (
-  dispatch
-) => {
-  try {
-    const res = await axios.post(`${host}/api/user/auth/signUp`, userData);
+export const userRegister =
+  (userData, setIsLoading, cb) => async (dispatch) => {
+    try {
+      const res = await axios.post(`${host}/api/user/auth/signUp`, userData);
 
-    // // save the new token from our fucking api to the cookies
-    if (res.status === 200) {
-      const { token } = await res.data;
-      cookie.set("_wus_BJK", token, { expires: 7 });
-      cb();
-    }
-  } catch (err) {
-    setIsLoading(false);
-    console.log(err);
-    if (err.response.data.error) {
-      return toast.error(err.response.data.error);
-    }
+      // // save the new token from our fucking api to the cookies
+      if (res.status === 200) {
+        const { token, user } = await res.data;
+        cookie.set("_wus_BJK", token, { expires: 7 });
+        cookie.set("user", user, { expires: 7 });
+        cb();
+      }
+    } catch (err) {
+      setIsLoading(false);
+      console.log(err);
+      if (err.response.data.error) {
+        return toast.error(err.response.data.error);
+      }
 
-    if (err.response.data.details[0].message) {
-      return toast.error(err.response.data.details[0].message);
+      if (err.response.data.details[0].message) {
+        return toast.error(err.response.data.details[0].message);
+      }
     }
-  }
-};
+  };
 
 export const userLogin = (userData, setIsLoading, cb) => async (dispatch) => {
   try {
@@ -36,8 +36,9 @@ export const userLogin = (userData, setIsLoading, cb) => async (dispatch) => {
 
     // // save the new token from our fucking api to the cookies
     if (res.status === 200) {
-      const { token } = await res.data;
+      const { token, user } = await res.data;
       cookie.set("_wus_BJK", token, { expires: 7 });
+      cookie.set("user", user, { expires: 7 });
       cb();
     }
   } catch (err) {

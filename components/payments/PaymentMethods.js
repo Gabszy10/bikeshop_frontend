@@ -18,6 +18,9 @@ import cookie from "js-cookie";
 import { formatDate } from "../../helpers/function";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
+import CreditCard from "./CreditCard";
+import Gcash from "./Gcash";
+import GrabPay from "./Grabpay";
 
 let host = process.env.API_URL;
 
@@ -27,6 +30,7 @@ function PaymentMethods() {
   const [isCampaign, setisCampaign] = useState(false);
   const [isLoading, setisLoading] = useState(false);
   const [isCodOn, setisCodOn] = useState(false);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     let encryptedInfoData = localStorage.getItem(process.env.INFO_COOKIE);
@@ -53,6 +57,18 @@ function PaymentMethods() {
     }
     // toast.error(err.response.data[0].message);
     // console.log(, "HEYYYY");
+  }, []);
+
+  useEffect(() => {
+    let encryptedData = localStorage.getItem(process.env.CART_COOKIE);
+    let cart = decryptData(encryptedData);
+
+    let amount = 0;
+    for (let i = 0; i < cart.length; i++) {
+      amount = amount + cart[i].discount_price * cart[i].quantity;
+    }
+
+    setTotal(amount < 100 ? 100 : amount);
   }, []);
 
   const handleChange = (value) => {
@@ -254,9 +270,7 @@ function PaymentMethods() {
                     name="radio-button"
                     onChange={() => handleChange("bank")}
                   />
-                  <label htmlFor="direct-bank-transfer">
-                    Direct Bank Transfer
-                  </label>
+                  <label htmlFor="direct-bank-transfer">Credit Card</label>
                   {selectedPayment == "bank" ? (
                     <>
                       <hr />
@@ -265,65 +279,9 @@ function PaymentMethods() {
                         alt="image"
                         height="150"
                       />
-                      <p style={{ paddingTop: "20px" }}>
-                        Once the order is completed, you can settle the amount
-                        into our BPI account (via deposit or bank transfer)
-                      </p>
-                      <div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>Bank:</h6>
-                          <h6>BPI</h6>
-                        </div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>Account Name:</h6>
-                          <h6>I-Wheels</h6>
-                        </div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>Account Number:</h6>
-                          <h6>3039022566</h6>
-                        </div>
-                      </div>
-                      <p style={{ color: "red", paddingTop: "20px" }}>
-                        <b>Note:</b> Please send proof of payment (screenshot,
-                        printscreen) to{" "}
-                        <span style={{ color: "#33bd33" }}>
-                          i-Wheels26@gmail.com
-                        </span>{" "}
-                        or send a message to our{" "}
-                        <a
-                          className="d-inline"
-                          href="https://www.facebook.com/i-Wheelsph-127061742122440/"
-                        >
-                          Facebook Page
-                        </a>
-                        .
-                      </p>
                       <br />
                       <br />
-                      {!isLoading ? (
-                        <button
-                          onClick={() => handleSubmit("Bank - BPI")}
-                          className="btn btn-light mb-3"
-                        >
-                          Confirm Order
-                        </button>
-                      ) : (
-                        <div className="lds-ring">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                      )}
+                      <CreditCard amount={total} handleSubmit={handleSubmit} />
 
                       <hr />
                     </>
@@ -391,64 +349,9 @@ function PaymentMethods() {
                         alt="image"
                         height="70"
                       />
-                      <p style={{ paddingTop: "20px" }}>
-                        Once the order is completed, you can settle the amount
-                        into our Gcash account (via deposit or bank transfer)
-                      </p>
-                      <div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>E-Wallet:</h6>
-                          <h6>GCash</h6>
-                        </div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>Account Name:</h6>
-                          <h6>Marxs Joshua</h6>
-                        </div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>Mobile Number:</h6>
-                          <h6>09214430131</h6>
-                        </div>
-                      </div>
-                      <p style={{ color: "red", paddingTop: "20px" }}>
-                        <b>Note:</b> Please send proof of payment (screenshot,
-                        printscreen) to{" "}
-                        <span style={{ color: "#33bd33" }}>
-                          i-Wheels26@gmail.com
-                        </span>{" "}
-                        or send a message to our{" "}
-                        <a
-                          className="d-inline"
-                          href="https://www.facebook.com/i-Wheelsph-127061742122440/"
-                        >
-                          Facebook Page
-                        </a>
-                        .
-                      </p>
                       <br />
-                      {!isLoading ? (
-                        <button
-                          onClick={() => handleSubmit("GCash")}
-                          className="btn btn-light mb-3"
-                        >
-                          Confirm Order
-                        </button>
-                      ) : (
-                        <div className="lds-ring">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                      )}
+                      <br />
+                      <Gcash amount={total} handleSubmit={handleSubmit} />
                       <hr />
                     </>
                   ) : null}
@@ -458,77 +361,22 @@ function PaymentMethods() {
                 <p>
                   <input
                     type="radio"
-                    id="paymaya"
+                    id="grabpay"
                     name="radio-button"
-                    onChange={() => handleChange("paymaya")}
+                    onChange={() => handleChange("grabpay")}
                   />
-                  <label htmlFor="paymaya">Paymaya</label>
-                  {selectedPayment == "paymaya" ? (
+                  <label htmlFor="grabpay">GrabPay</label>
+                  {selectedPayment == "grabpay" ? (
                     <>
                       <hr />
                       <img
-                        src={require("../../images/logos/paymaya.jpg")}
+                        src={require("../../images/logos/gcash.png")}
                         alt="image"
-                        height="50"
+                        height="70"
                       />
-                      <p style={{ paddingTop: "20px" }}>
-                        Once the order is completed, you can settle the amount
-                        into our Paymaya account (via deposit or bank transfer)
-                      </p>
-                      <div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>E-Wallet:</h6>
-                          <h6>Paymaya</h6>
-                        </div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>Account Name:</h6>
-                          <h6>I-Wheels</h6>
-                        </div>
-                        <div
-                          className="d-flex justify-content-between"
-                          style={{ maxWidth: "300px" }}
-                        >
-                          <h6>Mobile Number:</h6>
-                          <h6>0916 509 1083</h6>
-                        </div>
-                      </div>
-                      <p style={{ color: "red", paddingTop: "20px" }}>
-                        <b>Note:</b> Please send proof of payment (screenshot,
-                        printscreen) to{" "}
-                        <span style={{ color: "#33bd33" }}>
-                          i-Wheels26@gmail.com
-                        </span>{" "}
-                        or send a message to our{" "}
-                        <a
-                          className="d-inline"
-                          href="https://www.facebook.com/i-Wheelsph-127061742122440/"
-                        >
-                          Facebook Page
-                        </a>
-                        .
-                      </p>
                       <br />
-                      {!isLoading ? (
-                        <button
-                          onClick={() => handleSubmit("Paymaya")}
-                          className="btn btn-light mb-3"
-                        >
-                          Confirm Order
-                        </button>
-                      ) : (
-                        <div className="lds-ring">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                      )}
+                      <br />
+                      <GrabPay amount={total} handleSubmit={handleSubmit} />
                       <hr />
                     </>
                   ) : null}

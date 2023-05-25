@@ -77,7 +77,7 @@ function OrderSummary(props) {
             </tr>
           ))}
 
-          {total > 10000000 && (
+          {total < 100 && (
             <tr>
               <td className="order-subtotal">
                 <span>Service Charge</span>
@@ -85,7 +85,7 @@ function OrderSummary(props) {
 
               <td className="order-subtotal-price">
                 <span className="order-subtotal-amount">
-                  ₱{formatNumber(800 - total)}
+                  ₱{formatNumber(100 - total)}
                 </span>
               </td>
             </tr>
@@ -98,7 +98,7 @@ function OrderSummary(props) {
 
             <td className="order-subtotal-price">
               <span className="order-subtotal-amount">
-              ₱{formatNumber(total > 10000000 ? 800 : total)}
+              ₱{formatNumber(total < 100 ? 100 : total)}
               </span>
             </td>
           </tr>
@@ -121,16 +121,16 @@ function OrderSummary(props) {
             <td className="product-subtotal">
               <span className="subtotal-amount">
                 {" "}
-                ₱{formatNumber(total > 10000000 ? 800 : total)}
+                ₱{formatNumber(total < 100 ? 100 : total)}
               </span>
             </td>
           </tr>
         </tbody>
       </table>
-      {total > 10000000 && (
+      {total < 100 && (
         <p style={{ color: "red", textAlign: "center" }}>
-          Minimum order is ₱800. If order is below ₱800, you will be charge to
-          get to the 800 limit.
+          Minimum order is 100. If order is below 100, you will be charge to
+          get to the 100 limit.
         </p>
       )}
     </div>

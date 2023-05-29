@@ -179,7 +179,6 @@ function Customization({ cart }) {
     return arr;
   }
 
-  image();
   return (
     <section className="cart-area ptb-30">
       <div className="container">

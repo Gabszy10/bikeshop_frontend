@@ -13,7 +13,6 @@ function Index(props) {
           <Navbar />
           <Breadcrumb title="Checkout" />
           <CheckoutForm />
-
           <Facility />
           <Footer />
         </div>

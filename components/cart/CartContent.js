@@ -25,6 +25,7 @@ function CartContent(props) {
     note: "",
     message: "",
   });
+  const [customization, setCustomization] = useState(false);
 
   useEffect(() => {
     let decryptedData = decryptInfoData();
@@ -142,45 +143,115 @@ function CartContent(props) {
     return true;
   };
 
-  const proceedToCheckout = () => {
-    if (isValid()) {
-      if (addon.length) {
-        props.addToCartAddons(addon, 1);
-      }
-
-      const { delivery_date, delivery_time, note, message } = state;
-      let decryptedData = decryptInfoData();
-      if (decryptedData) {
-        let obj = {
-          ...decryptedData,
-          note: { value: note, error: "" },
-          message: { value: message, error: "" },
-          delivery_date: { value: delivery_date, error: "" },
-          delivery_time: { value: delivery_time, error: "" },
-        };
-        encryptInfoData(obj);
+  function removeItemAll(arr, value) {
+    var i = 0;
+    while (i < arr.length) {
+      if (arr[i] === value) {
+        arr.splice(i, 1);
       } else {
-        let obj = {
-          shipping_firstName: { value: "", error: "" },
-          shipping_lastName: { value: "", error: "" },
-          shipping_address: { value: "", error: "" },
-          shipping_city: { value: "", error: "" },
-          shipping_zip: { value: "", error: "" },
-          billing_email: { value: "", error: "" },
-          shipping_phone: { value: "", error: "" },
-          billing_firstName: { value: "", error: "" },
-          billing_lastName: { value: "", error: "" },
-          billing_phone: { value: "", error: "" },
-          note: { value: note, error: "" },
-          message: { value: message, error: "" },
-          delivery_date: { value: delivery_date, error: "" },
-          delivery_time: { value: delivery_time, error: "" },
-        };
-
-        encryptInfoData(obj);
+        ++i;
       }
+    }
+    return arr;
+  }
 
-      Router.push(`/checkout`);
+  const proceedToCheckout = () => {
+    if (customization) {
+      let parts = cart.map((a) => a.parts);
+      parts = removeItemAll(parts, "other");
+      parts = [...new Set(parts)];
+
+      if (parts.length == 6) {
+        if (isValid()) {
+          if (addon.length) {
+            props.addToCartAddons(addon, 1);
+          }
+
+          const { delivery_date, delivery_time, note, message } = state;
+          let decryptedData = decryptInfoData();
+          if (decryptedData) {
+            let obj = {
+              ...decryptedData,
+              note: { value: note, error: "" },
+              message: { value: message, error: "" },
+              delivery_date: { value: delivery_date, error: "" },
+              delivery_time: { value: delivery_time, error: "" },
+            };
+            encryptInfoData(obj);
+          } else {
+            let obj = {
+              shipping_firstName: { value: "", error: "" },
+              shipping_lastName: { value: "", error: "" },
+              shipping_address: { value: "", error: "" },
+              shipping_city: { value: "", error: "" },
+              shipping_zip: { value: "", error: "" },
+              billing_email: { value: "", error: "" },
+              shipping_phone: { value: "", error: "" },
+              billing_firstName: { value: "", error: "" },
+              billing_lastName: { value: "", error: "" },
+              billing_phone: { value: "", error: "" },
+              note: { value: note, error: "" },
+              message: { value: message, error: "" },
+              delivery_date: { value: delivery_date, error: "" },
+              delivery_time: { value: delivery_time, error: "" },
+            };
+
+            encryptInfoData(obj);
+          }
+
+          Router.push(`/checkout`);
+        }
+      } else {
+        toast.error("Bike parts is not complete.");
+      }
+    } else {
+      if (isValid()) {
+        if (addon.length) {
+          props.addToCartAddons(addon, 1);
+        }
+
+        const { delivery_date, delivery_time, note, message } = state;
+        let decryptedData = decryptInfoData();
+        if (decryptedData) {
+          let obj = {
+            ...decryptedData,
+            note: { value: note, error: "" },
+            message: { value: message, error: "" },
+            delivery_date: { value: delivery_date, error: "" },
+            delivery_time: { value: delivery_time, error: "" },
+          };
+          encryptInfoData(obj);
+        } else {
+          let obj = {
+            shipping_firstName: { value: "", error: "" },
+            shipping_lastName: { value: "", error: "" },
+            shipping_address: { value: "", error: "" },
+            shipping_city: { value: "", error: "" },
+            shipping_zip: { value: "", error: "" },
+            billing_email: { value: "", error: "" },
+            shipping_phone: { value: "", error: "" },
+            billing_firstName: { value: "", error: "" },
+            billing_lastName: { value: "", error: "" },
+            billing_phone: { value: "", error: "" },
+            note: { value: note, error: "" },
+            message: { value: message, error: "" },
+            delivery_date: { value: delivery_date, error: "" },
+            delivery_time: { value: delivery_time, error: "" },
+          };
+
+          encryptInfoData(obj);
+        }
+
+        Router.push(`/checkout`);
+      }
+    }
+  };
+
+  const handleCheckBox = (e) => {
+    if (e.target.checked) {
+      setCustomization(true);
+    } else {
+      setCustomization(false);
     }
   };
 
@@ -209,12 +280,23 @@ function CartContent(props) {
   return (
     <>
       <Customization cart={cart} />
-
       <section className="cart-area ptb-60">
         <ToastContainer transition={Slide} />
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-md-12">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  onChange={handleCheckBox}
+                />
+                <label class="form-check-label" for="exampleCheck1">
+                  Customize Bike
+                </label>
+              </div>
+              <br />
+              <hr />
               <form>
                 <div className="cart-table table-responsive">
                   <CartProduct setcart={setcart} isCampaign={isCampaign} />

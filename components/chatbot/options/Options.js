@@ -1,8 +1,25 @@
 import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
 const Options = (props) => {
-  const handleHowToOder = () => {
-    const botMessage = createChatBotMessage("Hello you can order on our website here at https://example.com.");
+  const warranty = () => {
+    const botMessage = createChatBotMessage(
+      "We have Cash on Delivery, Swipe on Delivery (Credit Card) for Metro Manila. And we deliver nationwide "
+    );
+
+    props.setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  const payment = () => {
+    const botMessage = createChatBotMessage(`
+    Bank Transfer, 
+    Gcash, 
+    Credit Card (Metrobank, Citibank, BPI, HSBC & Chinabank) 3-24 Months Installment, 
+    Home Credit Installment, 
+    Billease Installment, 
+    `);
 
     props.setState((prev) => ({
       ...prev,
@@ -11,7 +28,9 @@ const Options = (props) => {
   };
 
   const store = () => {
-    const botMessage = createChatBotMessage("Our store is located at Lilac St, Marikina, 1800 Metro Manila, Philippines.");
+    const botMessage = createChatBotMessage(
+      "Our main branch is located at 39 Lilac st. Marikina, and our other branch is BGC."
+    );
 
     props.setState((prev) => ({
       ...prev,
@@ -19,8 +38,10 @@ const Options = (props) => {
     }));
   };
 
-  const sale = () => {
-    const botMessage = createChatBotMessage("You can check our sale items at https://sales.com");
+  const delivery = () => {
+    const botMessage = createChatBotMessage(
+      "We have Cash on Delivery, Swipe on Delivery (Credit Card) for Metro Manila. And we deliver nationwide."
+    );
 
     props.setState((prev) => ({
       ...prev,
@@ -30,19 +51,24 @@ const Options = (props) => {
 
   const options = [
     {
-      text: "How to order?",
-      handler: handleHowToOder,
+      text: "Do you have a physical store?",
+      handler: store,
       id: 1,
     },
     {
-      text: "Where’s your store?",
-      handler: store,
+      text: "Do you accept delivery?",
+      handler: delivery,
       id: 2,
     },
     {
-      text: "What’s the best deal you can give me?",
-      handler: sale,
+      text: "What is your warranty for Electric Bikes & Electric Scooter?",
+      handler: warranty,
       id: 3,
+    },
+    {
+      text: "What are your mode of payments in-store? ",
+      handler: payment,
+      id: 4,
     },
   ];
 

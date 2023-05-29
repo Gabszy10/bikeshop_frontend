@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import { connect } from "react-redux";
 import OrderSummary from "./OrderSummary";
@@ -8,12 +8,22 @@ import Calendar from "../calendar/Calendar";
 import axios from "axios";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import { encryptInfoData } from "../../store/actions/infoActions";
-import { isDateBeforeToday } from "../../helpers/function";
+import cookie from "js-cookie";
 import { clearData } from "../../store/actions/cartActions";
 import Cookies from "js-cookie";
 
 function CheckoutForm({ total, shipping }) {
   let host = process.env.API_URL;
+
+  const [user, setuser] = useState(null);
+
+  useEffect(() => {
+    let token = cookie.get("_wus_BJK");
+    console.log(token);
+    if (token) {
+      setuser(token);
+    }
+  }, []);
 
   const handleSubmit = async () => {
     console.log("Form submitted.");
@@ -276,6 +286,7 @@ function CheckoutForm({ total, shipping }) {
       });
     }
   };
+  
   return (
     <>
       <ToastContainer transition={Zoom} />
@@ -285,18 +296,22 @@ function CheckoutForm({ total, shipping }) {
             <div className="row">
               <div className="col-lg-6 col-md-12">
                 <div className="shipping-details">
-                  <div class="form-check float-right">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      onChange={handleCheckBox}
-                    />
-                    <label class="form-check-label" for="exampleCheck1">
-                      Same as my user address
-                    </label>
-                  </div>
-                  <br />
-                  <hr />
+                  {user ? (
+                    <>
+                      <div class="form-check float-right">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          onChange={handleCheckBox}
+                        />
+                        <label class="form-check-label" for="exampleCheck1">
+                          Same as my user address
+                        </label>
+                      </div>
+                      <br />
+                      <hr />
+                    </>
+                  ) : null}
                   <h3 className="title">Send my orders to</h3>
 
                   <div className="row">

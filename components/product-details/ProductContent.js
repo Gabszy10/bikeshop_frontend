@@ -76,8 +76,68 @@ function ProductContent(props) {
     });
   };
 
-  const openSizeGuide = () => {
-    setstate({ ...state, sizeGuide: true });
+  const rating = (review) => {
+    if (review >= 5) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+        </div>
+      );
+    } else if (review == 4) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 3) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 2) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 1) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review <= 0) {
+      return (
+        <div className="rating">
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    }
   };
 
   const closeSizeGuide = () => {
@@ -133,16 +193,10 @@ function ProductContent(props) {
           ) : null}
 
           <div className="product-review">
-            <div className="rating">
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-            </div>
-            <Link href="#">
+            {rating(product.avg_review)}
+            {/* <Link href="#">
               <a className="rating-count">34 reviews</a>
-            </Link>
+            </Link> */}
           </div>
 
           <p>{product.description}</p>

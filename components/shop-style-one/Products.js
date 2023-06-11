@@ -41,35 +41,68 @@ function Products(props) {
     fetchCollection();
   }, []);
 
-  const openTabSection = (evt, tabNmae) => {
-    let i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabs_item");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].classList.remove("fadeInUp");
-      tabcontent[i].style.display = "none";
+  const rating = (review) => {
+    if (review >= 5) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+        </div>
+      );
+    } else if (review == 4) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 3) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 2) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 1) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review <= 0) {
+      return (
+        <div className="rating">
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
     }
-
-    tablinks = document.getElementsByTagName("li");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace("current", "");
-    }
-
-    document.getElementById(tabNmae).style.display = "block";
-    document.getElementById(tabNmae).className += " fadeInUp animated";
-    evt.currentTarget.className += "current";
-  };
-
-  const handleAddToCart = (product) => {
-    props.addToCart(product);
-
-    toast.success("Added to the cart", {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
   };
 
   const handleAddToCompare = (id) => {
@@ -225,13 +258,7 @@ function Products(props) {
                                       </>
                                     ) : null}
 
-                                    <div className="rating">
-                                      <i className="fas fa-star"></i>
-                                      <i className="fas fa-star"></i>
-                                      <i className="fas fa-star"></i>
-                                      <i className="fas fa-star"></i>
-                                      <i className="fas fa-star"></i>
-                                    </div>
+                                    {rating(data.avg_review)}
 
                                     {data.stock > 0 ? (
                                       <Link href={`/product/${data.slug}`}>

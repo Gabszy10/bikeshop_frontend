@@ -9,17 +9,68 @@ import { formatNumber } from "../../helpers/function";
 let host = process.env.API_URL;
 
 function CategoryProducts(props) {
-  const handleAddToCart = (product) => {
-    props.addToCart(product);
-
-    toast.success("Added to the cart", {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+  const rating = (review) => {
+    if (review >= 5) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+        </div>
+      );
+    } else if (review == 4) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 3) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 2) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review == 1) {
+      return (
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    } else if (review <= 0) {
+      return (
+        <div className="rating">
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+      );
+    }
   };
   return (
     <React.Fragment>
@@ -65,7 +116,6 @@ function CategoryProducts(props) {
                             />
                             {/* <img src={data.imageHover} alt="image" /> */}
                           </Link>
-
                         </div>
 
                         <div className="product-content">
@@ -115,13 +165,7 @@ function CategoryProducts(props) {
                             </>
                           ) : null}
 
-                          <div className="rating">
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                          </div>
+                          {rating(data.avg_review)}
 
                           <Link href={`/product/${data.slug}`}>
                             <a

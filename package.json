@@ -1,7 +1,7 @@
 {
     "name": "WeOrder",
     "engines": {
-        "node": ">=10.16.3 <=10.16.4"
+        "node": ">=10.16.3 <=18.16.4"
     },
     "version": "3.6.0",
     "description": "Flowershop ni Gabo",

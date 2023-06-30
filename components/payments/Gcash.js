@@ -28,8 +28,8 @@ const GCash = ({ amount, description, handleSubmit }) => {
           attributes: {
             amount: amount * 100,
             redirect: {
-              success: "http://localhost:3001/redirect",
-              failed: "http://localhost:3001/redirect",
+              success: "https://iwheels.vercel.app/redirect",
+              failed: "https://iwheels.vercel.app/redirect",
             },
             billing: { name: `${name}`, phone: `${phone}`, email: `${email}` },
             type: "gcash",

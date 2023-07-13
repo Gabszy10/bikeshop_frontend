@@ -74,7 +74,7 @@ function CartProduct(props) {
             <Link href={`/product/${data.slug}`}>
               <a>
                 <img
-                  src={`${host}/products/${data.product_images[0]["file_name"]}`}
+                  src={`https://ramdale.s3.amazonaws.com/${data.product_images[0]["file_name"]}`}
                   alt="image"
                 />
               </a>

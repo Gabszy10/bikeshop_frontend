@@ -1,6 +1,5 @@
 import React from "react";
 import Chatbot from "react-chatbot-kit";
-import logo from "../../images/logos/logo.png";
 
 import config from "../../components/chatbot/config";
 import MessageParser from "../../components/chatbot/MessageParser";

@@ -111,7 +111,7 @@ function CategoryProducts(props) {
                           <Link href={`/product/${data.slug}`}>
                             <img
                               style={{ cursor: "pointer" }}
-                              src={`${host}/products/${data.product_images[0]["file_name"]}`}
+                              src={`https://ramdale.s3.amazonaws.com/${data.product_images[0]["file_name"]}`}
                               alt="image"
                             />
                             {/* <img src={data.imageHover} alt="image" /> */}

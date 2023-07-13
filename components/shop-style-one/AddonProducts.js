@@ -172,7 +172,7 @@ function AddonProducts(props) {
                       <div className="single-product-item">
                         <div className="product-image">
                           <img
-                            src={`${host}/products/${data.product_images[0]["file_name"]}`}
+                            src={`https://ramdale.s3.amazonaws.com/${data.product_images[0]["file_name"]}`}
                           />
                         </div>
 

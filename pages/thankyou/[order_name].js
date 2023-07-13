@@ -127,7 +127,7 @@ function Thankyou(props) {
                     <div className="d-flex mb-2" key={i}>
                       <div className="d-flex">
                         <img
-                          src={`${host}/products/${item.product.product_images[0]["file_name"]}`}
+                          src={`https://ramdale.s3.amazonaws.com/${data.product_images[0]["file_name"]}`}
                           alt=""
                           height="110"
                         />

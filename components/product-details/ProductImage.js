@@ -23,7 +23,9 @@ function ProductImage(props) {
       return (
         <div key={i}>
           <div className="item">
-            <img src={`${host}/products/${image["file_name"]}`} />
+            <img
+              src={`https://ramdale.s3.amazonaws.com/${image["file_name"]}`}
+            />
           </div>
         </div>
       );
@@ -35,7 +37,10 @@ function ProductImage(props) {
       return (
         <div key={i}>
           <div className="item">
-            <img src={`${host}/products/${image["file_name"]}`} height="180" />
+            <img
+              src={`https://ramdale.s3.amazonaws.com/${image["file_name"]}`}
+              height="180"
+            />
           </div>
         </div>
       );

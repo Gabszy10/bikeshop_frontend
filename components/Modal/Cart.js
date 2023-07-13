@@ -86,7 +86,7 @@ function Cart(props) {
                     <div className="product-cart" key={idx}>
                       <div className="product-image">
                         <img
-                          src={`https://ramdale.s3.amazonaws.com/${data.product_images[0]["file_name"]}`}
+                          src={`https://ramdale.s3.amazonaws.com/${product.product_images[0]["file_name"]}`}
                           alt="image"
                         />
                       </div>
